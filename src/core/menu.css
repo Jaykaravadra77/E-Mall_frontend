@@ -1,0 +1,27 @@
+@import url("https://fonts.googleapis.com/css?family=Titillium+Web");
+ 
+.navbar .navbar-brand {
+  font-size: 30px;
+
+}
+.navbar{
+    box-shadow: 0 2px 2px 0px rgba(214, 208, 208, 0.2);
+     
+}
+.navbar .nav-item {
+  /* padding: 10px 20px; */
+  color:black;
+}
+.navbar .nav-link {
+  font-size: 20px;
+  color:black;
+  /* margin-left: 10px; */
+}
+.fa-bars {
+  color: #007bff;
+  font-size: 30px;
+}
+
+.act{
+  color: #007bff !important;
+}
