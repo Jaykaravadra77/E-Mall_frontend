@@ -71,7 +71,7 @@ function OrderDetail() {
                 className="form-control"
                 onChange={e => handleStatusChange(e, o._id)}
             >
-                <option>Update Status</option>
+                <option disabled>Update Status</option>
                 {status.map((status, index) => (
                     <option key={index} value={status}>
                         {status}
@@ -92,6 +92,8 @@ function OrderDetail() {
                         {order && order.length === 1 ?
 
                             <>
+                                
+                                {showStatus(order[0])}
                                 <ul className="list-group">
                                     <li className="list-group-item">Order By:{order[0]._id}</li>
                                     <li className="list-group-item">Order By:{order[0].user.name}</li>
@@ -110,7 +112,7 @@ function OrderDetail() {
                                             padding: "20px",
 
                                         }}
-                                    >  {showStatus(order[0])}
+                                    >   
                                         {showInput("Product name", p.name)}
                                         {showInput("Product price", p.price)}
                                         {showInput("Product total", p.count)}

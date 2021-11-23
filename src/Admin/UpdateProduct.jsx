@@ -1,15 +1,20 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router';
+import { useHistory, useParams } from 'react-router';
 import Layout from '../core/Layout';
 import AdminLayout from './AdminLayout';
 import { getProduct } from './APIadmin';
 import { fetchCategoryAPI } from './APIadmin';
 import { categoryByid } from './APIadmin';
- 
+import { updateProduct } from './APIadmin';
+import { Chk } from '../User/Chkauth';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'; 
 
 function UpdateProduct() {
+    let history = useHistory();
     let { id } = useParams();
     let [category,setCategory]= useState();
+    let checkAuth = Chk();
  
     const [values, setValues] = useState({
         name: '',
@@ -43,6 +48,33 @@ function UpdateProduct() {
             }
         })
     }
+
+
+    function showsuc() {
+		toast.success("Product Added Successfully ", {
+			position: "top-right",
+			autoClose: 1000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true,
+			progress: undefined,
+		});
+	}
+
+	function showEroor(error) {
+		toast.error(error, {
+			position: "top-right",
+			autoClose: 5000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true,
+			progress: undefined,
+		});
+
+	}
+
         
     function loadProduct(){
         getProduct(id).then((product)=>{
@@ -65,8 +97,8 @@ function UpdateProduct() {
     }
 
     async function fetchCat() {
-        let hidd= document.getElementById("ho");
-        hidd.style.display = "none";
+        // let hidd= document.getElementById("ho");
+        // hidd.style.display = "none";
 
 		try {
 			let data = await fetchCategoryAPI();
@@ -77,7 +109,25 @@ function UpdateProduct() {
 
 
 	}
+   
 
+    function submitUpdate(event){
+        event.preventDefault();
+        
+        console.log("submit fired");
+        if(checkAuth){
+            updateProduct(id,checkAuth.token,formData).then((data)=>{
+              console.log(data);
+              showsuc("Product Updated Successfully");
+              setTimeout(() => {
+                history.push("/admin/addProduct");
+              }, 2000);
+            }).catch((err)=>{
+                console.log(err);
+            })
+        }
+     
+    }
    
 
     useEffect(()=>{
@@ -88,9 +138,8 @@ function UpdateProduct() {
     function UpdateForm() {
         return (
             <>
-             
                 <div className="col-md-9 mx-auto mt-5">
-                    <form >
+                    <form onSubmit={submitUpdate} >
                         <div className="form-group">
                             <div className="row">
                                 <div className="col-md-6">
@@ -114,13 +163,13 @@ function UpdateProduct() {
                                     <label className="control-label text-secondary">Category</label>
                                     {/* {console.log(values.category)} */}
                             
-                                    <select onClick={fetchCat} name="category" value={values.category}  onChange={handlaval} className="form-control selectpicker">
+                                    <select onClick={fetchCat} name="category" value={values.category}   onChange={handlaval} className="form-control selectpicker">
                                       
-                                          <option id="ho" className="text-info bg-seondar"  disabled value={values.category}>{category}</option>
+                                          <option id="ho" className="text-info bg-seondar"  disabled >{category}</option>
                                         {categories ? Array.from(categories).map((c, i) => {
                                              
                                                 return (
-                                                    <option key={i}   > {c.name} </option>
+                                                    <option key={i}  value={c._id}  > {c.name} </option>
                                                 )
                                             
                                            

@@ -1,12 +1,14 @@
 import Layout from "../core/Layout";
 import AdminLayout from "./AdminLayout";
 import React, { useEffect, useState } from "react";
-import { addProductAPI, fetchCategoryAPI } from "./APIadmin";
+import { addProductAPI, fetchCategoryAPI, deleteProduct } from "./APIadmin";
 import { Chk } from "../User/Chkauth";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { getProducts } from "./APIadmin";
 import { NavLink } from "react-router-dom";
+
+
 
 function ManageProducts() {
 	let jwt = Chk();
@@ -16,7 +18,7 @@ function ManageProducts() {
 		category: '',
 		price: '',
 		categories: '',
-		descreption:'',
+		descreption: '',
 		shipping: '',
 		quantity: '',
 		photo: '',
@@ -31,13 +33,17 @@ function ManageProducts() {
 
 
 	useEffect(() => {
+		loadProducts();
+	}, [])
+
+	function loadProducts() {
 		console.log("Use Effect Fired");
 		getProducts().then((data) => {
 			setPoructs(data)
 		}).catch((err) => {
 			console.log(err);
 		})
-	}, [])
+	}
 
 	const handlaval = (event) => {
 		let value;
@@ -87,14 +93,15 @@ function ManageProducts() {
 			if (data.error) {
 				showEroor(data.error);
 			} else {
+				loadProducts();
 				showsuc()
 				setValues({
-					name:'',
-					descreption:'',
-					quantity:'',
-					price:'',
-					shipping:'',
-					photo:''
+					name: '',
+					descreption: '',
+					quantity: '',
+					price: '',
+					shipping: '',
+					photo: ''
 				})
 			}
 		})
@@ -113,27 +120,35 @@ function ManageProducts() {
 
 	}
 
+	function delProduct(id) {
+		deleteProduct(id, jwt.token).then((data) => {
+			showsuc("Product Deleted Successfully");
+			loadProducts();
+		})
+	}
+
 
 	function listProducts() {
 		return (
 			<div className="row justify-content-center">
 				<h3 className="     b-b-default mt-3 ">   </h3>
 				<h4 className="text-center mt-2">Products</h4>
-				<div className="col-md-9">
-					{
+				<div className="col-md-10">
+					{products.length>0?
 						products.map((p, i) => {
 							return (<>
-							   <h3 className="mb-4"> </h3>
-							   <NavLink to={`/admin/updateproduct/${p._id}`} className="btn btn-outline-info text-dark"> Update</NavLink>
+								<h3 className="mb-4"> </h3>
+								<NavLink to={`/admin/updateproduct/${p._id}`} className="btn btn-outline-info text-dark"> Update</NavLink>
+								<button className="btn btn-danger mx-1" onClick={() => { delProduct(p._id) }}>Delete</button>
 								<ul class="list-group" key={i}>
 									<li class="list-group-item"><span className="text-primary">Product Name:</span> 	{p.name}</li>
 									<li class="list-group-item"><span className="text-primary">Price:</span>	{p.price}</li>
-									<li class="list-group-item"><span className="text-primary">Descreption</span>	{p.description}</li>
+									<li class="list-group-item"><span className="text-primary">Descreption</span>	{p.descreption}</li>
 									<li class="list-group-item"><span className="text-primary">Quantity</span>	{p.quantity}</li>
 									<li class="list-group-item"><span className="text-primary">Category</span>   {p.category.name}</li>
 								</ul></>)
 						})
-					}
+					:<h5 className="mt-5 text-center">You Have No Products</h5>}
 				</div>
 			</div>
 		)
@@ -174,7 +189,7 @@ function ManageProducts() {
 										<div className="row">
 											<div className="col-md-6">
 												<label className="control-label text-secondary">Photo</label>
-												<input type="file" onChange={handlaval}  name="photo" className="form-control" />
+												<input type="file" onChange={handlaval} name="photo" className="form-control" />
 											</div>
 
 											<div className="col-md-5 mx-3">
@@ -182,11 +197,11 @@ function ManageProducts() {
 												<select onClick={fetchCat} name="category" value={values.category} onChange={handlaval} className="form-control selectpicker">
 													<option>Pease select Category</option>
 
-													{categories?Array.from(categories).map((c, i) => {
+													{categories ? Array.from(categories).map((c, i) => {
 														return (
 															<option key={i} value={c._id}>{c.name} {i}</option>
 														)
-													}):""}
+													}) : ""}
 
 
 												</select>

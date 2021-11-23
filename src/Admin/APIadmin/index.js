@@ -1,7 +1,7 @@
 
 export const addcategoryAPI = (catName,token) => {
 
-
+  
     let url = `${process.env.REACT_APP_API_URL}/category/create`;
 
     return fetch(url, {
@@ -156,14 +156,14 @@ export const getProduct = productId => {
         .catch(err => console.log(err));
 };
 
-export const updateProduct = (productId, userId, token, product) => {
-    return fetch(`${process.env.REACT_APP_API_URL}/product/${productId}/${userId}`, {
+export const updateProduct = (productId, token, formdata) => {
+    return fetch(`${process.env.REACT_APP_API_URL}/product/${productId}`, {
         method: 'PUT',
         headers: {
             Accept: 'application/json',
             "authorization": token
         },
-        body: product
+        body: formdata
     })
         .then(response => {
             return response.json();
@@ -183,3 +183,21 @@ export const categoryByid = (id) => {
         })
         .catch(err => console.log(err));
 };
+
+
+export const deleteCategory = (token,id) => {
+    return fetch(`${process.env.REACT_APP_API_URL}/category/${id}`, {
+        method: 'DELETE',
+        headers: {
+            Accept: 'application/json',
+            "authorization": token
+        }
+    })
+        .then(response => {
+            return response.json();
+        })
+        .catch(err => console.log(err));
+};
+
+ 
+ 
