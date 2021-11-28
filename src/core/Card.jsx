@@ -153,7 +153,7 @@ function Card({ product,ritemfunc, viewbthnvisible = true, cat, showcartbutton =
                         </div>
                         <h6 className="mb-0 " style={{ fontSize: "15px" }}> ₹{product.price}</h6>
                       
-                         {product.quantity!=0?sbtn():showstock(product.quantity)}
+                         {product.quantity!==0?sbtn():showstock(product.quantity)}
                         <NavLink to={`/product/${product._id}`} pid="asfdfds" className="btn mx-1  btn-success  btnview  mt-2" >View product</NavLink>
                         {updatequantity()}
                         {rbtn()}

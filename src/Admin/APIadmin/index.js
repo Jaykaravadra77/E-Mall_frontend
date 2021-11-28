@@ -199,5 +199,53 @@ export const deleteCategory = (token,id) => {
         .catch(err => console.log(err));
 };
 
- 
+export const updateCategory = (token, id,name) => {
+    return fetch(`${process.env.REACT_APP_API_URL}/category/${id}`, {
+        method: 'PUT',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            "authorization": token
+        },
+        body: JSON.stringify({  name})
+    })
+        .then(response => {
+            return response.json();
+        })
+        .catch(err => console.log(err));
+};
+
+
+export const getUsers = () => {
+   
+    let url = `${process.env.REACT_APP_API_URL}/users`;
+   
+    return fetch(`${url}`, {
+
+         method: "GET",
+        
+    }).then((res) => {
+         return res.json();
+    }).catch((err) => {
+         console.log(err);
+    })
+}
+
+export const deleteUser = (token,id) => {
+    return fetch(`${process.env.REACT_APP_API_URL}/user/delete`,{
+        method: 'DELETE',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            "authorization": token
+        },
+        body: JSON.stringify({id})
+        
+    })
+        .then(response => {
+            return response.json();
+        })
+        .catch(err => console.log(err));
+};
+
  

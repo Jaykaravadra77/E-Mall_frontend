@@ -101,7 +101,7 @@ function ManageProducts() {
 					quantity: '',
 					price: '',
 					shipping: '',
-					photo: ''
+					formData:new FormData()
 				})
 			}
 		})
@@ -136,17 +136,17 @@ function ManageProducts() {
 				<div className="col-md-10">
 					{products.length>0?
 						products.map((p, i) => {
-							return (<>
+							return (<div key={i}>
 								<h3 className="mb-4"> </h3>
 								<NavLink to={`/admin/updateproduct/${p._id}`} className="btn btn-outline-info text-dark"> Update</NavLink>
 								<button className="btn btn-danger mx-1" onClick={() => { delProduct(p._id) }}>Delete</button>
-								<ul class="list-group" key={i}>
-									<li class="list-group-item"><span className="text-primary">Product Name:</span> 	{p.name}</li>
-									<li class="list-group-item"><span className="text-primary">Price:</span>	{p.price}</li>
-									<li class="list-group-item"><span className="text-primary">Descreption</span>	{p.descreption}</li>
-									<li class="list-group-item"><span className="text-primary">Quantity</span>	{p.quantity}</li>
-									<li class="list-group-item"><span className="text-primary">Category</span>   {p.category.name}</li>
-								</ul></>)
+								<ul className="list-group" key={i}>
+									<li className="list-group-item"><span className="text-primary">Product Name:</span> 	{p.name}</li>
+									<li className="list-group-item"><span className="text-primary">Price:</span>	{p.price}</li>
+									<li className="list-group-item"><span className="text-primary">Descreption</span>	{p.descreption}</li>
+									<li className="list-group-item"><span className="text-primary">Quantity</span>	{p.quantity}</li>
+									<li className="list-group-item"><span className="text-primary">Category</span>   {p.category.name}</li>
+								</ul></div>)
 						})
 					:<h5 className="mt-5 text-center">You Have No Products</h5>}
 				</div>
@@ -159,19 +159,19 @@ function ManageProducts() {
 		return (
 			<div className="row">
 
-				<button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+				<button type="button" className="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">
 					Add Product
 				</button>
 
 
-				<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-					<div class="modal-dialog">
-						<div class="modal-content">
+				<div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<div className="modal-dialog">
+						<div className="modal-content">
 							<div className="modal-header">
 
 								<button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 							</div>
-							<div class="modal-body">
+							<div className="modal-body">
 								<form onSubmit={submitData} >
 									<div className="form-group">
 										<div className="row">

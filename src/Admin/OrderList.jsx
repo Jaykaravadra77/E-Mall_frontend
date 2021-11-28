@@ -40,6 +40,8 @@ function Olist() {
                             <tr>
                                 <th>Order By</th>
                                 <th>Order on</th>
+                                <th> Status</th>
+                                <th> Update Status</th>
                                 <th>view Details</th>
                             </tr>
                         </thead>
@@ -49,7 +51,9 @@ function Olist() {
                               return( <tr key ={i}>
                                <td>{o.user.name}</td>
                                <td>{moment(o.createdAt).fromNow()}</td>
-                               <td><NavLink to={`/admin/orderdetail/${o._id}`} className="btn btn-danger">Details</NavLink ></td>
+                               <td>{o.status}</td>
+                               <td><NavLink to={`/admin/orderdetail/${o._id}`} className="btn btn-outline-info text-dark">Update Status</NavLink ></td>
+                               <td><NavLink to={`/admin/orderdetail/${o._id}`} className="btn btn-outline-primary">View Order</NavLink ></td>
                                <td> </td>
                              </tr>
                               )

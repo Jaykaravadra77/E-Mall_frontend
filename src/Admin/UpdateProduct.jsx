@@ -104,7 +104,7 @@ function UpdateProduct() {
 			let data = await fetchCategoryAPI();
 			setValues({ ...values, categories: data.categories });
 		} catch (error) {
-
+            showEroor(error)
 		}
 
 
@@ -121,7 +121,7 @@ function UpdateProduct() {
               showsuc("Product Updated Successfully");
               setTimeout(() => {
                 history.push("/admin/addProduct");
-              }, 2000);
+              }, 3000);
             }).catch((err)=>{
                 console.log(err);
             })
