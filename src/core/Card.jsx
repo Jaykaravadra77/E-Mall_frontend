@@ -130,7 +130,7 @@ function Card({ product,ritemfunc, viewbthnvisible = true, cat, showcartbutton =
                                 <p className="card-text">Added On {moment(product.createdAt).fromNow()}</p>
                                 {showstock(product.quantity)}
                                 <br />
-                                {product.quantity!==0?sbtn():""}
+                                {product.quantity>=0?sbtn():""}
                             </div>
                         </div>
 

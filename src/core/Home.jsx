@@ -65,13 +65,15 @@ function Home() {
         margin: 0 auto;
         border-color: pink;
       `;
+
     return (
+
          <>
-       
+        
         <Layout className="container-fluid">
             {load? <>
                 <div style={{marginTop:"30vh"}}>
-                  <HashLoader  color={'#123abc'} loading={load} css={override} size={100} />
+                  <HashLoader  color={'#123abc'} loading={load}  css={override} size={100} />
                 </div>
                
             

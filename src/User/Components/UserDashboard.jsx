@@ -5,7 +5,7 @@ import { update } from "../API User";
 import "../../../node_modules/font-awesome/css/font-awesome.min.css";
 import { useCookies } from "react-cookie";
 import moment from 'moment';
-import { getPurchaseHistory } from "../API User";
+import { getPurchaseHistory,ordersByuser } from "../API User";
 
 
 function UserDashboard() {
@@ -16,6 +16,12 @@ function UserDashboard() {
         name: "",
         email: "",
     });
+
+     useEffect(()=>{
+        ordersByuser(jwt.token,jwt.user._id).then((data)=>{
+            console.log(data);
+        })
+     },[])
 
     // let [refect, setRefect] = useState(false);
 
@@ -146,9 +152,9 @@ function UserDashboard() {
 
     const purchaseHistory = history => {
         return (
-            <div className="card mb-5">
+            <div className="card mb-5"  >
                 <h3 className="card-header">Purchase history</h3>
-                <ul className="list-group">
+                <ul className="list-group" >
                     <li className="list-group-item">
                         {history.map((h, i) => {
                             return (
@@ -185,7 +191,7 @@ function UserDashboard() {
 
 
 
-                    <div className="row    "  >
+                    <div className="row    "    >
                         <div className="  col-md-12 mt-4"  >
                             <div className="card user-card-full" >
                                 <div className="row m-l-0 m-r-0">
@@ -198,7 +204,7 @@ function UserDashboard() {
 
                                         </div>
                                     </div>
-                                    <div className="col-md-9" style={{ height: "80vh" }}>
+                                    <div className="col-md-9" style={{ height: "80vh",overflow:"auto" }}>
                                         <div className="card-block">
                                             <h3 className="m-b-20 p-b-5 b-b-default f-w-600">Information</h3>
                                             <div className="row">

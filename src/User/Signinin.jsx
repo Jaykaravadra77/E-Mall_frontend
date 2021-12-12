@@ -9,6 +9,7 @@ import { useHistory } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { Chk } from "./Chkauth";
 import loginimg from "../staticimg/os.jpg";
+import {NavLink} from 'react-router-dom'
 
 
 
@@ -198,9 +199,14 @@ function Signin() {
                                                                  <input type="text" name="email1" onChange={handleval1} value={values1.email1} placeholder="email" />
                                                                  <input type="password" name="password1" onChange={handleval1} value={values1.password1} placeholder="Password" />
                                                                  <button className="btn btn-primary " onClick={signinSubmitdata} name="login" value="Login" >Login</button>
-                                                                 <p className="signup">
+                                                                 <p className="signup ">
                                                                       Don't have an account ?
                                                                       <a href="#signin" onClick={toggleForm}>Sign Up.</a>
+                                                                      <br className/>
+                                                                      
+                                                                 </p>
+                                                                 <p className="text-center">
+                                                                    <NavLink style={{ textDecoration: 'none' }} to="/resetPassword">Forgot Password ?</NavLink>
                                                                  </p>
                                                             </form>
                                                        </div>
