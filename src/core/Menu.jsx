@@ -101,6 +101,8 @@ function Menu() {
                     <button className="btn btn-outline-danger" onClick={sout}>Logout</button>
                   </li>
                 </> : <>
+                <li className="nav-item mx-3">
+                  <NavLink className="nav-link" exact activeClassName="act" to="/">Home</NavLink></li>
                   <li className="nav-item ">
                     <NavLink className="nav-link" activeClassName="act" to="/dashboard">Dashboard</NavLink>
                   </li>

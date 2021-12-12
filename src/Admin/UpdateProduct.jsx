@@ -186,17 +186,7 @@ function UpdateProduct() {
                                     <label className="control-label text-secondary">Quantity(in numbers)</label>
                                     <input onChange={handlaval} type="tel" value={values.quantity} name="quantity" className="form-control" />
                                 </div>
-                                <div className="col-md-6">
-                                    <label className="control-label text-secondary">Shipping</label>
-                                    <select onChange={handlaval} name="shipping" className="form-control selectpicker">
-                                        <option  > Select Shiping</option>
-                                        <option value="0">No</option>
-                                        <option value="1">Yes</option>
-
-
-
-                                    </select>
-                                </div>
+                               
                             </div>
                         </div>
 

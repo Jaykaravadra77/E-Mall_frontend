@@ -39,7 +39,7 @@ function Routes() {
                     <AdminRoutes component={OrderDetail} path="/admin/orderdetail/:orderid" exact />
                     <AdminRoutes component={UpdateProduct} path="/admin/updateproduct/:id" exact />
                     <AdminRoutes component={UserList} path="/admin/users" exact />
-                    <Route exact path="/reset">
+                    <Route exact path="/resetPassword">
                         <ResetPassword />
                     </Route>
                     <Route path="/reset/:token">

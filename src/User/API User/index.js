@@ -45,3 +45,19 @@ export const getPurchaseHistory = (token) => {
         })
         .catch(err => console.log(err));
 };
+
+export const ordersByuser = (token,id) => {
+
+    return fetch(`${process.env.REACT_APP_API_URL}/order/byuser/:id`, {
+        method: "POST",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            "authorization": token
+        },body:JSON.stringify({id})
+    })
+        .then(response => {
+            return response.json();
+        })
+        .catch(err => console.log(err));
+};
